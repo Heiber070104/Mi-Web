@@ -1,7 +1,7 @@
 # Hoja de ruta — Web personal y portafolio
 
 Fecha de creación: 30 de octubre de 2026.
-Estado: librerías instaladas, Tailwind integrado y Paraglide configurado para español e inglés. Dirección visual pendiente.
+Estado: etapa 3 completada y base visual aprobada para incorporar contenido personal. Etapas 0 y 1 completadas; etapa 2 con pasos 1–4 completados y pasos 5 y 6 aplazados por el propietario. Etapa 4 pendiente de comenzar.
 
 ## 1. Objetivo
 
@@ -84,7 +84,7 @@ La primera versión usará selección manual mediante la URL, sin detección aut
 
 ## 5. Dirección visual inicial
 
-Esta dirección es un punto de partida para la página de prueba; todavía no representa un estilo aprobado.
+Esta dirección corresponde a la base visual aplicada y aprobada al cierre de la etapa 3. Los ajustes necesarios al incorporar contenido personal se realizarán en la etapa 4.
 
 - **Personalidad:** profesional, cercana y centrada en mostrar el trabajo realizado.
 - **Composición:** jerarquía clara, espacio entre secciones y proyectos con protagonismo visual.
@@ -92,7 +92,7 @@ Esta dirección es un punto de partida para la página de prueba; todavía no re
 - **Tipografía:** una familia legible con pocos pesos y una jerarquía clara entre títulos y texto. Se puede comenzar con la pila del sistema y decidir después si se necesita una fuente propia.
 - **Componentes:** tarjetas de proyectos, botones, etiquetas de tecnologías y navegación con estados coherentes.
 - **Movimiento:** transiciones breves como propuesta inicial, sin dificultar la lectura ni retrasar la interacción.
-- **Tema:** elegir un tema principal en la primera revisión; el modo claro/oscuro queda como mejora opcional.
+- **Tema:** oscuro aprobado como tema principal; el modo claro/oscuro queda como mejora opcional.
 - **Accesibilidad:** navegación por teclado, foco visible, contraste suficiente, etiquetas comprensibles e información disponible sin depender del cursor.
 
 Se respetará la preferencia de movimiento reducido tanto en CSS como en las transiciones de Svelte; estas últimas necesitan su propio ajuste y no deben depender únicamente de una regla CSS.
@@ -122,8 +122,8 @@ Los textos de prueba estarán disponibles en ambos idiomas desde esta etapa para
 - [x] Documentar el objetivo, el alcance y la propuesta de herramientas.
 - [x] Revisar y aprobar la selección de librerías.
 - [x] Confirmar Paraglide JS, español como idioma base y la propuesta de URLs por idioma.
-- [ ] Definir paleta, tema principal, referencias visuales y nivel de movimiento.
-- [ ] Confirmar las secciones de la página de prueba.
+- [x] Definir paleta, tema principal, referencias visuales y nivel de movimiento.
+- [x] Confirmar las secciones de la página de prueba.
 
 **Entregable:** selección técnica y dirección visual registradas en este documento.
 
@@ -150,27 +150,81 @@ Avance del punto 2: plugin `@tailwindcss/vite` incorporado en `vite.config.ts`, 
 
 ### Etapa 2 — Construir la página con información de prueba
 
-La base bilingüe ya incluye catálogos en `messages/es.json` y `messages/en.json`, integración con Vite, rutas localizadas y una página provisional con enlaces para cambiar de idioma. `yarn run check` genera las declaraciones antes de comprobar tipos; los archivos generados se excluyen de la revisión directa de TypeScript, conservando los tipos de sus importaciones. La compilación genera HTML para `/` y `/en/`. Se verificaron los idiomas y títulos en ambos archivos; la revisión interactiva del selector queda para la demo.
+La base bilingüe incluye catálogos en `messages/es.json` y `messages/en.json`, integración con Vite y rutas localizadas. `yarn run check` genera las declaraciones antes de comprobar tipos; los archivos generados se excluyen de la revisión directa de TypeScript, conservando los tipos de sus importaciones. La compilación genera HTML para `/` y `/en/`. Se verificaron idiomas, títulos, cambio a inglés en navegador y composición en ambos idiomas a varios anchos. La revisión exhaustiva de teclado y recarga con anclas y parámetros sigue pendiente.
 
-- [ ] Implementar las secciones acordadas con textos e imágenes provisionales.
-- [ ] Adaptar el diseño a móvil, tableta y escritorio.
-- [ ] Implementar navegación móvil e interacciones acordadas.
-- [ ] Incorporar el selector de idioma y los textos de prueba en español e inglés.
+- [x] Implementar las secciones acordadas con textos e imágenes provisionales.
+- [x] Adaptar el diseño a móvil, tableta y escritorio.
+- [x] Implementar navegación móvil e interacciones acordadas.
+- [x] Incorporar el selector de idioma y los textos de prueba en español e inglés.
 - [ ] Incorporar movimiento y su alternativa de movimiento reducido.
 - [ ] Revisar estados de foco, interacción, imágenes y textos extensos.
 
 **Entregable:** página de prueba navegable para evaluar el diseño completo.
 
+#### Comparación del plan con el estado real
+
+La implementación de algunos puntos se adelantó al construir los componentes y las secciones. La tabla conserva la distinción entre implementación y verificación pendiente; la base visual se aprobó posteriormente en la etapa 3.
+
+| Paso | Estado real | Trabajo que queda |
+| --- | --- | --- |
+| 1. Secciones y contenido provisional | Completado | Los cambios de apariencia se tratarán en la etapa 3. |
+| 2. Diseño adaptable | Completado | Repetir la revisión únicamente tras ajustes que afecten la composición. |
+| 3. Navegación e interacciones | Implementado y marcado como completado | Ya existen menú desplegable, enlaces a secciones, botones de desplazamiento y filtros. Se verificaron apertura/cierre del menú de tableta y filtro móvil de proyectos. La prueba integral por teclado corresponde al paso 6. |
+| 4. Selector y contenido bilingüe | Completado | Selector, textos y atributos de imágenes traducidos; cambio de idioma, recarga, parámetros y anclas comprobados en los casos documentados de la etapa 3. |
+| 5. Movimiento y alternativa reducida | Implementado; verificación reducida aplazada | Fade con desplazamiento y estados hover implementados y revisados; intensidad aceptada en la etapa 3. Sigue pendiente la prueba de la preferencia de movimiento reducido activada en navegador. |
+| 6. Revisión de estados y contenido | Pendiente de revisión integral | Recorrer la página con teclado, verificar foco y activación de acciones, imágenes cargadas y alternativas, textos largos, y los estados de interacción. Las revisiones visuales ya realizadas sirven de base. |
+
+**Separación de etapas:** la etapa 2 comprueba que la demo funciona; la etapa 3 recoge las mejoras de diseño del propietario, las aplica y obtiene su aprobación. La etapa 3 está cerrada y la etapa 4 puede comenzar. Las comprobaciones previas de tipos y compilación son avances técnicos, pero no cierran la etapa 5 de publicación sobre contenido definitivo.
+
+**Cierre de la etapa 0:** la paleta, el tema oscuro, la referencia conceptual, el nivel de movimiento ajustado y las secciones implementadas quedan confirmados con la aceptación de la demo en la etapa 3.
+
+Avance del paso 2: navegación compacta por debajo de 1024 px para dar espacio al encabezado en tableta; ilustración de presentación centrada y limitada a 24 rem en móvil; tarjetas con ancho flexible, espaciado adaptable y notas alineadas. Verificación en navegador de ambos idiomas a 320, 360, 768, 1024 y 1440 px: sin desplazamiento horizontal; proyectos en una, dos y tres columnas según el tamaño. Menú de tableta verificado al abrir y al elegir una sección. Capturas en `demo-mobile.png`, `demo-tablet.png` y `demo-desktop.png`. Comprobación de tipos y compilación completadas correctamente. La verificación general de teclado, foco y demás interacciones continúa en los pasos posteriores.
+
+Avance del paso 1: encabezado, presentación ilustrada, biografía ficticia, tres proyectos conceptuales (Nexo, Pulso y Prisma), tecnologías, contacto de prueba y pie de página. Textos en español e inglés mediante Paraglide; información común centralizada en `src/lib/data/portfolio.ts`. Nuevas secciones reutilizables en `src/lib/components/sections`. Cuatro imágenes creadas con la herramienta integrada ImageGen, guardadas en `static/images`; sus prompts finales se documentan en `static/images/README.md`. Las imágenes de proyectos son conceptos y no capturas de productos reales. El contacto muestra datos ficticios sin enlaces de envío. Verificado: `yarn run check` sin errores ni advertencias, compilación de ambos idiomas, revisión visual de escritorio y comprobación en navegador del cambio a inglés y filtro móvil. Captura de escritorio en `demo-preview.png`. La revisión de tamaños móvil/tableta y de los demás estados sigue pendiente en los próximos pasos.
+
 ### Etapa 3 — Revisar y aprobar los estilos
 
-- [ ] Revisar colores, tipografía, distribución y apariencia de las tarjetas.
-- [ ] Evaluar la comodidad de la navegación y la intensidad de las animaciones.
-- [ ] Revisar el selector de idioma y la composición visual con textos en ambos idiomas.
-- [ ] Registrar observaciones concretas y aplicar ajustes.
-- [ ] Volver a revisar los tamaños de pantalla afectados.
-- [ ] Registrar la aprobación del diseño y cualquier pendiente aceptado.
+El propietario indicó avanzar a esta etapa dejando pendientes los pasos 5 y 6 de la etapa 2. Tras revisar la demo y aplicar sus observaciones, se registra la etapa 3 como completada y la base visual como aprobada. Los pasos aplazados de la etapa 2 permanecen abiertos y no se consideran verificados por esta aprobación.
+
+- [x] Revisar colores, tipografía, distribución y apariencia de las tarjetas.
+- [x] Evaluar la comodidad de la navegación y la intensidad de las animaciones.
+- [x] Revisar el selector de idioma y la composición visual con textos en ambos idiomas.
+- [x] Registrar observaciones concretas y aplicar ajustes.
+- [x] Volver a revisar los tamaños de pantalla afectados.
+- [x] Registrar la aprobación del diseño y cualquier pendiente aceptado.
 
 **Entregable:** estilo visual aprobado y observaciones resueltas o documentadas.
+
+**Cierre de etapa — 2 de noviembre de 2026:** revisión de los seis puntos frente a las implementaciones y comprobaciones registradas, junto con la aceptación del propietario. Sin nuevas correcciones detectadas en esta revisión.
+
+| Punto | Evidencia de cierre |
+| --- | --- |
+| 1. Colores, tipografía, distribución y tarjetas | Aprobación previa del propietario y revisión de coherencia visual y contrastes documentada. |
+| 2. Navegación y animaciones | Header fijo con blur; separación de anclas; fade ajustado en textos, tarjetas y filtros; parallax descartado; enlace y URL activos según scroll. |
+| 3. Idiomas y composición | Español e inglés, selector que conserva sección y parámetros; revisión de ambas versiones. |
+| 4. Observaciones y correcciones | Ajustes registrados y aplicados: altura de la presentación, navegación fija, intensidad del fade, estado al saltar entre secciones y recarga sin destello del inicio. |
+| 5. Tamaños afectados | Nueva verificación en navegador de ambos idiomas a 320, 360, 768, 1024 y 1440 px: sin desplazamiento horizontal, header fijo, tres tarjetas presentes y About después de la primera pantalla. |
+| 6. Aprobación y pendientes aceptados | Base visual aceptada para la etapa 4. Quedan aplazadas la prueba en navegador de movimiento reducido y la revisión integral de teclado/foco y estados de la etapa 2. |
+
+Las siete pruebas automáticas y las comprobaciones de tipos/compilación de la última implementación pasaron; no se repitieron por este cambio documental. Esta aprobación no equivale a publicar la web ni a aprobar contenido personal todavía no incorporado.
+
+**URL vinculada al scroll:** el encabezado identifica la sección que cruza la zona de lectura bajo el header fijo y actualiza el fragmento de la URL y el enlace activo en turquesa (`aria-current="location"`). Utiliza navegación superficial de SvelteKit 3 con reemplazo del historial, sin reiniciar scroll ni foco, conservando ruta, parámetros e idioma. Espera a que finalice la restauración inicial antes de sincronizar y no cambia de sección por abrir el menú móvil. La detección incluye el final de página para secciones cortas. Pruebas de selección en `tests/activeSection.test.mjs`.
+
+Verificación de seguimiento: recorrido manual descendente por About, Projects, Technologies y Contact, y ascendente hacia Technologies; los hashes y el enlace activo coinciden. Se conservó el parámetro de prueba de la URL. La recarga mantuvo el scroll a 2073 px y la sección Technologies. Tras una navegación explícita y varios desplazamientos, Atrás volvió a la posición anterior a esa navegación sin recorrer los cambios automáticos. El cambio a inglés mantuvo la sección y los parámetros. Verificación móvil a 360 px sin desbordamiento horizontal. Siete pruebas automáticas pasaron. Captura en `demo-active-section.png`.
+
+**Recarga sin destello del inicio:** se añadió una protección previa al primer render en `src/app.html` para recargas, restauración del historial y enlaces a secciones. El layout muestra el contenido tras inicializar el router, restaurar el scroll y esperar dos frames de renderizado. La posición se guarda al salir en sessionStorage y solo se reutiliza al recargar exactamente la misma URL; los enlaces directos nuevos usan su ancla. La entrada normal al inicio permanece visible. Hay una salida de respaldo a los 5 segundos y tratamiento de páginas restauradas desde caché para evitar ocultación indefinida si falla la hidratación. Verificado en navegador: scroll manual a 1070 px conservado al recargar; Contacto a 2594 px antes y después; Proyectos restaurado y ancla inglesa About a 541 px conservada. Cinco pruebas automáticas, tipos sin errores ni advertencias y compilación correcta. Pruebas: `node --test tests/initialScroll.test.mjs tests/scrollFade.test.mjs`. Captura en `demo-reload-restored.png`.
+
+**Separación de la presentación:** la sección inicial ocupa como mínimo el alto visible de pantalla menos los 92 px del encabezado. De este modo, «Sobre mí» comienza después de la primera pantalla al cargar desde el inicio. La altura puede crecer si el contenido lo necesita y se utiliza la unidad estable svh para evitar saltos por las barras del navegador móvil.
+
+**Encabezado fijo:** posición fija superior con fondo oscuro translúcido, blur de 12 px, sombra discreta y borde inferior en degradado difuminado. Se reserva su altura de 92 px en el flujo y se añade separación de scroll para no tapar las secciones al navegar. El menú desplegado tiene altura máxima de pantalla y desplazamiento interno. Fondo más opaco como alternativa cuando no hay soporte de blur. Verificado en escritorio y móvil: header en coordenada superior 0 al navegar, secciones a 108 px frente al borde inferior del header a 92 px, apertura/cierre del menú y ausencia de desbordamiento horizontal. Tipos y compilación correctos. Captura en `demo-fixed-header.png`.
+
+**Corrección de saltos entre secciones:** se reprodujo que Proyectos conservaba el estado visible al volver de una sección inferior a Sobre mí. Se sustituyó la dependencia de cambios de intersección por una actualización de todos los elementos ante scroll, cambios de ancla, redimensionamiento y restauración de página. Las lecturas se agrupan antes de escribir estados y se descuenta la traslación del propio fade para evitar que interfiera con su umbral. Los ajustes personales de scroll-margin se conservan. Verificado en navegador el estado oculto del título, filtros y tarjetas al volver a Sobre mí, incluida la ruta móvil Proyectos → Contacto → Sobre mí; se comprobó que Proyectos vuelve a aparecer al navegar a él. Prueba de regresión en tests/scrollFade.test.mjs: node --test tests/scrollFade.test.mjs. Tipos sin errores ni advertencias. Captura en demo-about-fade-fixed.png.
+
+**Fade al hacer scroll:** se añadió la acción reutilizable `src/lib/actions/scrollFade.ts` con un cálculo compartido de visibilidad sincronizado mediante requestAnimationFrame, sin dependencias. Títulos, descripciones, biografía, tarjetas y el grupo de botones de filtro de proyectos aparecen al entrar desde abajo y se desvanecen al salir por abajo al volver hacia arriba. El contenido que ya pasó por la parte superior permanece visible para evitar destellos. Transición reforzada de 1100 ms con opacidad y desplazamiento vertical: sube desde 64 px hasta su posición al aparecer, y baja hasta 64 px al desaparecer (36 px en móvil). Curva de aceleración y desaceleración suave; la activación se calcula al 82 % de la altura visible para que la entrada y la salida sean perceptibles dentro de la pantalla. La traslación del fade es independiente de la elevación hover de las tarjetas. Con movimiento reducido se anula el desplazamiento y la transición. Con movimiento reducido o sin JavaScript, el contenido permanece visible; el foco dentro del elemento fuerza su visibilidad. Verificado en navegador el ciclo de oculto → visible → oculto de tarjetas y encabezado de proyectos. Tipos sin errores ni advertencias y compilación correcta. Verificado también el recorrido de entrada (opacidad parcial y traslación descendiendo a cero), posición visible final y salida con traslación hacia abajo. Captura actual en `demo-fade-slide.png`. La comprobación de la preferencia reducida en navegador sigue aplazada; este ajuste no cierra los puntos pendientes ni implica aprobación de la intensidad final.
+
+**Decisión sobre el movimiento:** el propietario descartó el parallax tras revisarlo. Se retiraron el componente y sus importaciones, y se restauraron la ilustración, el adorno de «Sobre mí» y las imágenes de proyectos sin desplazamiento ligado al scroll ni ampliación adicional. Las capturas demo-parallax.png y demo-parallax-v2.png corresponden a pruebas anteriores y no representan el estado actual. Se conservan las interacciones hover previas. Las verificaciones aplazadas de la etapa 2 mantienen su estado.
+
+**Revisión del punto 1:** aprobado expresamente por el propietario. Revisión adicional del código de estilos y componentes, y de las capturas existentes de escritorio, tableta y móvil: paleta coherente, jerarquía tipográfica clara, espaciado consistente, imágenes de tarjetas con proporción 16:9 y notas alineadas. No se encontraron correcciones necesarias dentro de este punto. Contrastes calculados para pares de colores sólidos: texto principal/fondo 18,05:1; plateado/superficie 10,58:1; texto tenue/superficie 8,05:1; turquesa/fondo 10,66:1; texto/botón primario 9,16:1. Esta comprobación no equivale a una auditoría completa de accesibilidad ni a una nueva prueba interactiva. La aprobación corresponde a colores, tipografía, distribución y tarjetas; los otros puntos de esta etapa y los pasos aplazados conservan su estado.
 
 **Condición para avanzar:** aprobación explícita de los estilos antes de reemplazar los ejemplos por información e imágenes personales.
 
@@ -213,7 +267,7 @@ La base bilingüe ya incluye catálogos en `messages/es.json` y `messages/en.jso
 - [ ] El contenido ficticio está identificado y permite valorar el diseño.
 - [ ] El selector de idioma funciona en móvil y escritorio y conserva la selección al recargar la URL.
 - [ ] Los textos de ambos idiomas están completos y no rompen botones, tarjetas ni navegación.
-- [ ] El propietario aprueba expresamente el resultado visual.
+- [x] El propietario aprueba expresamente el resultado visual.
 
 ## 9. Organización propuesta para la implementación
 
@@ -258,11 +312,11 @@ Se conservará la convención de importaciones `#lib` del proyecto. Se crearán 
 | Español como idioma base y URLs `/` y `/en/` | Confirmado e implementado |
 | Primera página con información de prueba | Definido por el propietario |
 | Contenido e imágenes personales después de aprobar estilos | Definido por el propietario |
-| Mantener SvelteKit, Svelte y TypeScript existentes | Propuesto |
+| Mantener SvelteKit, Svelte y TypeScript existentes | Confirmado en la base implementada |
 | Tailwind CSS y Lucide como dependencias visuales iniciales | Aprobados e instalados; Tailwind integrado, uso de iconos pendiente |
-| Componentes propios y transiciones nativas de Svelte | Pendiente de aprobación |
-| Paleta, tema y tipografía definitivos | Pendiente de revisión |
+| Componentes propios de Svelte y animaciones CSS | Aprobados al cerrar la etapa 3 |
+| Paleta, tema oscuro y tipografía de la demo | Aprobados como base para el contenido personal |
 | Modo claro/oscuro y páginas individuales de proyectos | Opcionales, por evaluar |
 | Alojamiento y dominio | Pendiente para la etapa de publicación |
 
-**Siguiente paso:** revisar la muestra visual y concretar las decisiones pendientes de la etapa 0 antes de desarrollar las secciones completas de la etapa 2. Los seis puntos de la etapa 1 están completados.
+**Siguiente paso:** etapa 4: reunir e incorporar el nombre público, presentación, biografía, contacto, proyectos reales e imágenes personales, con sus versiones en español e inglés. Los pasos 5 y 6 de la etapa 2 siguen aplazados por indicación del propietario y conservan sus casillas pendientes.

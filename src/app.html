@@ -4,6 +4,43 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="text-scale" content="scale" />
+		<style>
+			html { background: #080a0b; }
+			html[data-restoring-scroll] body { visibility: hidden; }
+		</style>
+		<script>
+			(() => {
+				const storageKey = 'portfolio:reload-scroll';
+				window.addEventListener('pagehide', () => {
+					try {
+						sessionStorage.setItem(storageKey, JSON.stringify({ url: location.href, x: scrollX, y: scrollY }));
+					} catch { /* Native restoration remains available when storage is blocked. */ }
+				});
+				const navigation = performance.getEntriesByType('navigation')[0];
+				const section = location.hash && location.hash !== '#top';
+				if (!section && navigation?.type !== 'reload' && navigation?.type !== 'back_forward') return;
+				// Run before first paint, before the client can briefly reset the scroll.
+				document.documentElement.setAttribute('data-restoring-scroll', '');
+				let position;
+				try {
+					if (navigation?.type === 'reload') position = JSON.parse(sessionStorage.getItem(storageKey) || 'null');
+				} catch { /* Fall back to the URL anchor or native scroll restoration. */ }
+				if (position?.url === location.href && Number.isFinite(position.x) && Number.isFinite(position.y) && position.y >= 0) {
+					document.documentElement.setAttribute('data-restore-scroll-x', String(position.x));
+					document.documentElement.setAttribute('data-restore-scroll-y', String(position.y));
+				} else if (section && navigation?.type !== 'back_forward') {
+					document.documentElement.setAttribute('data-restore-anchor', location.hash.slice(1));
+				}
+				const reveal = () => {
+					for (const name of ['data-restoring-scroll', 'data-restore-scroll-x', 'data-restore-scroll-y', 'data-restore-anchor']) {
+						document.documentElement.removeAttribute(name);
+					}
+				};
+				// Fail open if the application cannot hydrate, rather than hiding content indefinitely.
+				setTimeout(reveal, 5000);
+				window.addEventListener('pageshow', (event) => { if (event.persisted) reveal(); });
+			})();
+		</script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">
